@@ -47,7 +47,7 @@ func TestProduct(t *testing.T){
 
 
 
-	
+
 	t.Run("Description is required", func(t *testing.T) {
 
 		Products := Entity.Products{
@@ -64,6 +64,26 @@ func TestProduct(t *testing.T){
 		g.Expect(err.Error()).To(Equal("NameProduct is required"))
 
 	})
+
+
+	t.Run("Peice is required", func(t *testing.T) {
+
+		Products := Entity.Products{
+			NameProduct:   "Me-o",
+			Description:   "dfdf",
+			Price:          0,
+			Stock:          12,
+		}
+
+		ok,err := govalidator.ValidateStruct(Products)
+		g.Expect(ok).NotTo(BeTrue())
+		g.Expect(err).NotTo(BeNil())
+
+		g.Expect(err.Error()).To(Equal("Peice is required"))
+
+	})
+
+
 
 
 }
